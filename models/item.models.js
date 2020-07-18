@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const searchSchema = Schema({
+const itemSchema = Schema({
     itemName: String,
     price: Number,
 })
 
-const Search = mongoose.model("Search", searchSchema)
-module.exports = Search;
+const Item = mongoose.model("Item", itemSchema)
+module.exports = Item;

@@ -3,14 +3,15 @@ const mongoose = require("mongoose")
 const expressEjsLayouts = require("express-ejs-layouts");
 const app = express();
 
+
 require("dotenv").config()
 
-mongoose.set('useCreateIndex', true); // deprecated error
 mongoose.connect(
     process.env.MONGODB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
+        useCreateIndex: true,  // deprecated error
     },
     () => {
         console.log("Mongodb connected");
@@ -24,16 +25,11 @@ app.use(express.urlencoded({
 app.set("view engine", "ejs")
 app.use(expressEjsLayouts)
 
-
-
 // MIDDLEWARE
-
-app.use("/", require("./routes/search.routes"))
+app.use("/shops", require("./routes/shop.routes"))
+app.use("/", require("./routes/item.routes"))
 
 // CREATE
-
-
-
 app.listen(process.env.PORT, () => {
     console.log(`running on ${process.env.PORT}`);
 })

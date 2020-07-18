@@ -1,32 +1,29 @@
-<h3 style="text-decoration: underline;"> Search Results </h3>
+<!-- SHOW SHOP RESULTS AFTER SEARCHING VIEWS -->
+<h3 style="text-decoration: underline;"> Businesses/Shops List </h3>
+<br>
 
-
-<form class="form-inline" method="post" action="/search/">
-
+<form class="form-inline" method="post" action="/shops/review">
 
     <table class="table">
         <thead class="thead-inverse">
             <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <!-- <th> Business/Shop </th> -->
+                <th> Business/Shop </th>
+                <th> Location </th>
             </tr>
         </thead>
         <tbody>
+            <% shops.forEach(shop => {%>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
+                <!-- <td>  </td> -->
+                <td> <%= shop.shopname %> </td>
+                <td> <%= shop.location %> </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
+            <% }) %>
         </tbody>
     </table>
 
-    <!-- PAGE NUMBERING -->
+    <!-- PAGE NUMBERING NAVIGATION-->
     <nav aria-label="...">
         <ul class="pagination">
 
@@ -45,7 +42,7 @@
             <li class="page-item">
                 <a class="page-link" href="#">Next</a>
             </li>
-            
+
         </ul>
     </nav>
 

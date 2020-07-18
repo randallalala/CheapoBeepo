@@ -1,13 +1,12 @@
 const router = require("express").Router();
-const Search = require("../models/search.models");
-// const search = document.getElementById("search")
+const Item = require("../models/item.models");
 
-// MAIN INDEX PAGE
+// MAIN ITEMS INDEX PAGE
 router.get("/", (req, res) => {
-    Search.find()
-        .then(searches => {
-            res.render("searches/index", {
-                searches
+    Item.find()
+        .then(items => {
+            res.render("items/index", {
+                items
             })
         })
         .catch((err) => {
@@ -18,12 +17,12 @@ router.get("/", (req, res) => {
 
 // REVIEW 
 router.get("/review", (req, res) => {
-    // console.log(req.params.id);
-    Search.findById(req.params.id)
-        .then(search => {
-            console.log(search);
-            res.render("searches/review", {
-                search
+    console.log(req.params);
+    Item.find()
+        .then(items => {
+            console.log(items);
+            res.render("items/review", {
+                items
             })
         })
         .catch(err => {
@@ -31,25 +30,30 @@ router.get("/review", (req, res) => {
         })
 })
 
-// // CREATE GET 
-// router.get("/create", async (req, res) => {
+// CREATE GET 
+router.get("/create", (req, res) => {
+    // console.log("create item-get");
+    res.render("items/create")
+});
 
-//     res.render("items/create", {items})
-// });
-
-// // CREATE POST
-// router.post("/create", (req, res) => {
-//     console.log(req.body);
-//     let item = new Item(req.body)
-//     item.save()
-//         .then(() => {
-//             console.log("item saved");
-//             res.redirect("/")
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         })
-// })
+// CREATE POST
+router.post("/create", (req, res) => {
+    // console.log("create item-post");
+    console.log(req.body);
+    let itemData = {
+        itemName: req.body.itemName,
+        price: req.body.price,
+    }
+    let newitem = new Item(itemData)
+    newitem.save()
+        .then(() => {
+            console.log("new item saved");
+            res.redirect("/create") //change to /items
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
 
 // // DELETE
 // router.delete("/delete/:id", (req, res) => {
