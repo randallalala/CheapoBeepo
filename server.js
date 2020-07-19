@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const expressEjsLayouts = require("express-ejs-layouts");
+const {
+    request
+} = require("express");
 const app = express();
 
 
@@ -11,7 +14,7 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
-        useCreateIndex: true,  // deprecated error
+        useCreateIndex: true, // deprecated error
     },
     () => {
         console.log("Mongodb connected");
@@ -29,7 +32,7 @@ app.use(expressEjsLayouts)
 app.use("/shops", require("./routes/shop.routes"))
 app.use("/", require("./routes/item.routes"))
 
-// CREATE
+
 app.listen(process.env.PORT, () => {
     console.log(`running on ${process.env.PORT}`);
 })

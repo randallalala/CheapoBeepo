@@ -1,6 +1,6 @@
 <!-- REVIEW ITEMS SEARCH VIEWS -->
 
-<h3 style="text-decoration: underline;"> Search Results </h3>
+<h3 style="text-decoration: underline;"> Items List </h3>
 <br>
 <form class="form-inline" method="post" action="/review">
 
@@ -9,15 +9,15 @@
             <tr>
                 <!-- <th> Business/Shop </th> -->
                 <th> Item </th>
-                <th> Price (SGD) </th>
+                <th > Price (SGD) </th>
             </tr>
         </thead>
         <tbody>
             <% items.forEach(item => {%>
             <tr>
                 <!-- <td>  </td> -->
-                <td> <%= item.itemName %> </td>
-                <td> <%= item.price %> </td>
+                <td > <%= item.itemName %> </td>
+                <td > <%= item.price %> </td>
             </tr>
             <% }) %>
         </tbody>
