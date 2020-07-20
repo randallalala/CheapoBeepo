@@ -1,12 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose")
 const expressEjsLayouts = require("express-ejs-layouts");
-const {
-    request
-} = require("express");
 const app = express();
-
-
 require("dotenv").config()
 
 mongoose.connect(

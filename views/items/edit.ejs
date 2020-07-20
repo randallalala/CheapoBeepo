@@ -1,0 +1,39 @@
+<form action="/edit/<%= item._id %>" method="post">
+
+    <label for=""> Item </label>
+    <input type="text" name="itemName" value="<%= item.itemName %>" />
+    <br>
+    <label for=""> Price </label>
+    <input type="number" name="price" value="<%= item.price %>" />
+    <br>
+    <label for=""> Quantity </label>
+    <input type="number" name="quantity" value="<%= item.quantity %>" />
+    <br>
+
+    Units
+    <select name="unit">
+        <%
+        let options = ["Select One", "Grams", "Ounces", "mL"]
+        for (let i = 0; i < options.length; i++) {
+            let selected = ( item.unit == i) ? "selected" : "Select One";
+        %>
+            <option value="<%=options[i] %>" <%=selected %>>
+                <%=options[i] %>
+            </option>
+        <% } %>
+    </select>
+    <div><br>
+            <strong style="text-decoration: underline;">Conversion Reference</strong>
+            <br>
+            1 quart = 2 pints
+            <br>
+            1 gallon = 4 quarts
+            <br>
+            1 ounce = 28.35 grams
+            <br>
+            1 pound = 453.6 grams
+            <br>
+            1 pound = 16 ounces</div>
+            <br>
+    <button type="submit">Save Edit</button>
+</form>

@@ -1,0 +1,10 @@
+<form action="/shops/edit/<%= shop._id %>" method="post">
+
+    <label> Shop/Business Name </label>
+    <input type="text" class="form-control" name="shopname" value="<%= shop.shopname %>" />
+    <br>
+    <label> Location </label>
+    <input type="text" class="form-control" name="location" value="<%= shop.location %>" />
+    <br>
+    <button type="submit">Save Edit</button>
+</form>

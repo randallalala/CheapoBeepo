@@ -2,10 +2,34 @@
 
 <h3 style="text-decoration: underline;"> Search Results </h3>
 <br>
-<% results.forEach(item => { %>
-<ul>
-    <li>
-        <%= item.itemName %>
-    </li>
-</ul>
-<% }) %>
+
+<table class="table">
+
+    <thead class="thead-inverse">
+        <tr>
+            <th>No.</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price(SGD)</th>
+            <th>Price/100g</th>
+            <th>Business/Shop</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% results.forEach(item => { %>
+        <tr>
+            <!-- for (let i = 0; i < item.length; i++) { -->
+            <td></td>
+            <td> <%= item.itemName %> </td>
+            <td>  </td>
+            <td> <%= item.price %> </td>
+            <td>  </td>
+            <td>  </td>
+            <td>  </td>
+        </tr>
+        <% }) %>
+    </tbody>
+
+</table>
