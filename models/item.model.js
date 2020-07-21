@@ -10,10 +10,10 @@ const itemSchema = Schema({
         enum: ["grams", "ounces", "millilitres"],
         default: "grams",
     },
-    shops: [{
+    shop: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "shop",
-    }]
+        ref: "Shop", // referring to a model
+    }
 })
 
 const Item = mongoose.model("Item", itemSchema)

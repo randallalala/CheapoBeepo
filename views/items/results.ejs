@@ -1,8 +1,6 @@
 <!-- REVIEW ITEMS SEARCH VIEWS -->
-
-<h3 style="text-decoration: underline;"> Search Results </h3>
+<h2>Search results for: "<%= searchresult %>"</h2>
 <br>
-
 <table class="table">
 
     <thead class="thead-inverse">
@@ -18,16 +16,17 @@
     </thead>
 
     <tbody>
-        <% results.forEach(item => { %>
+        <% let i = 1; 
+        results.forEach(item => { %>
         <tr>
-            <!-- for (let i = 0; i < item.length; i++) { -->
-            <td></td>
+            <td> <%=i++%> </td>
             <td> <%= item.itemName %> </td>
+            <td> <%= item.quantity %> <%= item.unit %> </td>
+            <td> $<%= item.price.toFixed(2) %> </td>
+            <td> </td>
             <td>  </td>
-            <td> <%= item.price %> </td>
-            <td>  </td>
-            <td>  </td>
-            <td>  </td>
+            <td> </td>
+            
         </tr>
         <% }) %>
     </tbody>

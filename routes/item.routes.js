@@ -18,16 +18,31 @@ router.get("/", (req, res) => {
 // REVIEW
 router.get("/review", (req, res) => {
     Item.find()
+        .populate("shop")
         .then((items) => {
-            // console.log(items);
+            console.log(items);
             res.render("items/review", {
                 items,
             });
+            // res.send(items)
         })
         .catch((err) => {
             console.log(err);
         });
 });
+//BACKUP REVIEW
+// router.get("/review", (req, res) => {
+//     Item.find()
+//         .then((items) => {
+//                         // console.log(items);
+//             res.render("items/review", {
+//                 items,
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
 
 // CREATE GET
 router.get("/create", async (req, res) => {
@@ -36,7 +51,7 @@ router.get("/create", async (req, res) => {
     res.render("items/create", {
         shops,
     });
-    console.log(shops);
+    // console.log(shops);
 });
 
 // CREATE POST
@@ -46,14 +61,15 @@ router.post("/create", async (req, res) => {
             itemName,
             price,
             quantity,
-            unit
+            unit,
+            shop,
         } = req.body;
-
         console.log(req.body);
         let newitem = new Item({
             itemName,
             price,
             quantity,
+            shop,
         });
         if (req.body.unit == "grams") {
             newitem.unit = "grams";
@@ -63,41 +79,18 @@ router.post("/create", async (req, res) => {
             newitem.unit = "millilitres";
         }
         console.log(unit);
+        console.log(newitem);
         let saveditem = await newitem.save();
-        console.log("new item saved");
+        // console.log("new item saved");
         if (saveditem) {
             res.redirect("/create");
         }
+        // res.send(newitem)
     } catch (error) {
         console.log(error);
     }
 });
 
-// // SEARCH SPECIFIC ITEMS
-router.get("/search", (req, res) => {
-    // console.log(req.query.search);
-    Item.find({
-            // itemname from model schema
-            $or: [{
-                    itemName: new RegExp(req.query.search, "i"),
-                },
-                {
-                    price: {
-                        $gt: req.query.price,
-                    },
-                },
-            ],
-        })
-        .then((results) => {
-            // console.log(results);
-            res.render("items/results", {
-                results,
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
 
 //  UPDATE GET
 router.get("/edit/:id", (req, res) => {
@@ -140,6 +133,41 @@ router.post("/delete/:id", (req, res) => {
 });
 
 module.exports = router;
+
+// SEARCH SPECIFIC ITEMS
+router.get("/search", (req, res) => {
+    // console.log(req.query.search);
+    let searchresult = (req.query.search)
+    Item.find({
+            // itemname from model schema
+            $or: [{
+                    itemName: new RegExp(req.query.search, "i"),
+                },
+                // {
+                //     price: {
+                //         $gt: req.query.price,
+                //     },
+                // },
+                // {
+                //     location: new RegExp(req.query.search, "i"),
+                // },
+            ],
+        })
+        .then((results) => {
+            // console.log(results);
+            res.render("items/results", {
+                results,
+                searchresult
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+// let itemResult = await item.find(regexp search)
+// let shopResult = await<however you get all items from one shop here>
+// then combine into results then send to render
 
 // ------------------------------- NOTES AND TESTS
 // let str = "mushroom"

@@ -19,11 +19,12 @@
         <tbody>
             <% items.forEach(item => {%>
             <tr>
+                
                 <!-- <td>  </td> -->
                 <td> <%= item.itemName %> </td>
                 <td> $<%= item.price %> </td>
                 <td> <%= item.quantity %> <%= item.unit %> </td>
-                <td> </td>
+                <td>  <%= item.shop.shopname %></td>
                 <td> </td>
                 <td> 
                     <a method="get" href="/edit/<%= item._id %>" style="display:inline" class="btn-sm btn-info"
