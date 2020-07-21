@@ -1,7 +1,6 @@
 <!-- REGISTER NEW ITEMS VIEWS -->
 
-<h3 style="text-decoration: underline;">Register New Items</h3>
-<br>
+<h3 style="text-decoration: underline;">Register New Items</h3> <br>
 <form action="/create" method="post">
 
     <div class="form-group">
@@ -14,40 +13,56 @@
         <br>
         <label> Quantity </label>
         <input type="number" class="form-control" name="quantity" placeholder="E.g. 100grams">
+
         <div><br>
-            Units<br><select name="unit">
+            <label> Units </label><br>
+            <select name="unit">
                 <option value="">Select One</option>
                 <option value="grams">Grams</option>
                 <option value="ounces">Ounces</option>
                 <option value="millilitres">mL</option>
                 <!-- todo unit/pound/pint/gallon -->
-            </select></div>
+            </select>
+        </div>
+
         <div><br>
             <label> Business/Shop </label><br>
-            <select name="shop">
-                <br>
+            <select name="shop"> <br>
                 <option value="">Select One</option>
                 <% shops.forEach(shop => { %>
-                <option value="<%= shop._id %>">
-                    <%= shop.shopname %>
-                </option>
+                <option value="<%= shop._id %>"> <%= shop.shopname %> </option>
                 <% }) %>
-            </select></div>
+            </select>
         </div>
-            <div><button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Submit </button></div>
+
+        <div><br>
+            <label> Location </label><br>
+            <select name="location"> <br>
+                <option value="">Select One</option>
+                <% shops.forEach(shop => { %>
+                <option value="<%= shop._id %>"> <%= shop.location %> </option>
+                <% }) %>
+            </select>
+        </div>
+
+    </div>
+
+    <div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Submit </button>
+    </div> <br>
+
+    <div>
+        <strong style="text-decoration: underline;">Conversion Reference</strong> <br>
+        1 quart = 2 pints
         <br>
-        <div>
-            <strong style="text-decoration: underline;">Conversion Reference</strong>
-            <br>
-            1 quart = 2 pints
-            <br>
-            1 gallon = 4 quarts
-            <br>
-            1 ounce = 28.35 grams
-            <br>
-            1 pound = 453.6 grams
-            <br>
-            1 pound = 16 ounces</div>
+        1 gallon = 4 quarts
+        <br>
+        1 ounce = 28.35 grams
+        <br>
+        1 pound = 453.6 grams
+        <br>
+        1 pound = 16 ounces
+    </div>
 
 
 </form>

@@ -17,15 +17,15 @@
 
     <tbody>
         <% let i = 1; 
-        results.forEach(item => { %>
+        searchResults.forEach(item => { %>
         <tr>
             <td> <%=i++%> </td>
             <td> <%= item.itemName %> </td>
             <td> <%= item.quantity %> <%= item.unit %> </td>
-            <td> $<%= item.price.toFixed(2) %> </td>
+            <td>$<%= item.price.toFixed(2) %> </td>
             <td> </td>
-            <td>  </td>
             <td> </td>
+            <td> <%= item.shop.location %> </td>
             
         </tr>
         <% }) %>

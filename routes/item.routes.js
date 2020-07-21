@@ -30,19 +30,6 @@ router.get("/review", (req, res) => {
             console.log(err);
         });
 });
-//BACKUP REVIEW
-// router.get("/review", (req, res) => {
-//     Item.find()
-//         .then((items) => {
-//                         // console.log(items);
-//             res.render("items/review", {
-//                 items,
-//             });
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// });
 
 // CREATE GET
 router.get("/create", async (req, res) => {
@@ -135,39 +122,67 @@ router.post("/delete/:id", (req, res) => {
 module.exports = router;
 
 // SEARCH SPECIFIC ITEMS
-router.get("/search", (req, res) => {
+router.get("/search", async (req, res) => {
     // console.log(req.query.search);
-    let searchresult = (req.query.search)
-    Item.find({
-            // itemname from model schema
-            $or: [{
-                    itemName: new RegExp(req.query.search, "i"),
-                },
-                // {
-                //     price: {
-                //         $gt: req.query.price,
-                //     },
-                // },
-                // {
-                //     location: new RegExp(req.query.search, "i"),
-                // },
-            ],
-        })
-        .then((results) => {
-            // console.log(results);
-            res.render("items/results", {
-                results,
-                searchresult
-            });
-        })
-        .catch((err) => {
-            console.log(err);
+    try {
+
+        let searchresult = (req.query.search)
+        // let itemSearch = {itemName: new RegExp(req.query.search, "i")}
+        // let locationSearch = {price: new RegExp(req.query.search, "i")}
+        let totalResult = await Item.find().populate("shop")
+
+        let searchResults = totalResult.filter(item => {
+            return item.itemName.toLowerCase().includes(req.query.search) ||
+                item.shop.location.toLowerCase().includes(req.query.search);
         });
+
+        res.render("items/results", {
+            searchResults,
+            searchresult,
+            // totalResult,
+            // res.send(searchResults)
+        });
+    } catch (err) {
+        console.log(err);
+    };
 });
 
-// let itemResult = await item.find(regexp search)
-// let shopResult = await<however you get all items from one shop here>
-// then combine into results then send to render
+// let ounceConv = ounce * 28.35
+
+// if (item.unit == ounces){
+// let conv = item.unit * 28.35
+// }
+
+// // BACKUP SPECIFIC ITEMS
+// router.get("/search", (req, res) => {
+//     // console.log(req.query.search);
+//     let searchresult = (req.query.search)
+//     Item.find({
+//             // itemname from model schema
+//             $or: [{
+//                     itemName: new RegExp(req.query.search, "i"),
+//                 },
+//                 {
+//                     price: {
+//                         $gt: req.query.price,
+//                     },
+//                 },
+//                 {
+//                     location: new RegExp(req.query.search, "i"),
+//                 },
+//             ],
+//         })
+//         .then((results) => {
+//             // console.log(results);
+//             res.render("items/results", {
+//                 results,
+//                 searchresult
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
 
 // ------------------------------- NOTES AND TESTS
 // let str = "mushroom"
