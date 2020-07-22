@@ -3,17 +3,21 @@ const mongoose = require("mongoose")
 const expressEjsLayouts = require("express-ejs-layouts");
 const app = express();
 require("dotenv").config()
-
-mongoose.connect(
-    process.env.MONGODB, {
+const PORT = process.env.PORT
+mongoose.Promise = Promise;
+mongoose
+    .connect(process.env.MONGODBLIVE, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false,
         useCreateIndex: true, // deprecated error
-    },
-    () => {
-        console.log("Mongodb connected");
+        useCreateIndex: true,
     })
+    .then(() => {
+        console.log("mongodb is running!");
+    })
+    .catch((e) => {
+        console.log(e);
+    });
 
 app.use(express.static("public")); //look for static files in public folder
 app.use(express.urlencoded({

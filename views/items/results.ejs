@@ -1,5 +1,5 @@
 <!-- REVIEW ITEMS SEARCH VIEWS -->
-<h2>Search results for: "<%= searchresult %>"</h2>
+<h2>Search results for: "<%= searched %>"</h2>
 <br>
 <table class="table">
 
@@ -24,7 +24,7 @@
             <td> <%= item.quantity %> <%= item.unit %> </td>
             <td>$<%= item.price.toFixed(2) %> </td>
             <td> </td>
-            <td> </td>
+            <td> <%= item.shop.shopname %> </td>
             <td> <%= item.shop.location %> </td>
             
         </tr>

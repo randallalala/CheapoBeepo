@@ -84,7 +84,7 @@ router.post("/edit/:id", (req, res) => {
     Shop.findByIdAndUpdate(req.params.id, req.body)
         .then(() => {
             console.log("completed");
-            res.redirect("/review");
+            res.redirect("/shops/review");
         })
         .catch((err) => {
             console.log(err);

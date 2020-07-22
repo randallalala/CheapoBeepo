@@ -119,27 +119,22 @@ router.post("/delete/:id", (req, res) => {
         });
 });
 
-module.exports = router;
-
 // SEARCH SPECIFIC ITEMS
 router.get("/search", async (req, res) => {
     // console.log(req.query.search);
     try {
 
-        let searchresult = (req.query.search)
-        // let itemSearch = {itemName: new RegExp(req.query.search, "i")}
-        // let locationSearch = {price: new RegExp(req.query.search, "i")}
-        let totalResult = await Item.find().populate("shop")
-
-        let searchResults = totalResult.filter(item => {
+        let searched = (req.query.search);
+        let totalResults = await Item.find().populate("shop");
+        let searchResults = totalResults.filter(item => {
+            // console.log(parseFloat(item.price).includes(req.query.search));
             return item.itemName.toLowerCase().includes(req.query.search) ||
+                item.shop.shopname.toLowerCase().includes(req.query.search) ||
                 item.shop.location.toLowerCase().includes(req.query.search);
         });
-
         res.render("items/results", {
+            searched,
             searchResults,
-            searchresult,
-            // totalResult,
             // res.send(searchResults)
         });
     } catch (err) {
@@ -147,11 +142,45 @@ router.get("/search", async (req, res) => {
     };
 });
 
-// let ounceConv = ounce * 28.35
+/*
+function convert() {
+    
+    if item unit = ounces
+    let convqty =  item quantity /  item quantity * 2
+    let convprice =  item price /  item quantity * 2
+    
+    if item unit = grams
+    let convqty =  item quantity /  item quantity * 100
+    let convprice =  item price /  item quantity * 100
+    
+    if item unit = mL
+    let convqty =  item quantity /  item quantity * 100
+    let convprice =  item price /  item quantity * 100
+    
+    
+    return convqty && convprice
+    
+}
+*/
 
-// if (item.unit == ounces){
+
 // let conv = item.unit * 28.35
 // }
+
+/*
+
+        <br>
+        1 gallon = 4 quarts
+        <br>
+        1 ounce = 28.35 grams
+        <br>
+        1 pound = 453.6 grams
+        <br>
+        1 pound = 16 ounces
+*/
+// let ounceConv = ounce * 28.35
+
+
 
 // // BACKUP SPECIFIC ITEMS
 // router.get("/search", (req, res) => {
@@ -183,6 +212,9 @@ router.get("/search", async (req, res) => {
 //             console.log(err);
 //         });
 // });
+
+
+module.exports = router;
 
 // ------------------------------- NOTES AND TESTS
 // let str = "mushroom"
