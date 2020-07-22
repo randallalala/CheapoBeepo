@@ -33,5 +33,5 @@ app.use("/", require("./routes/item.routes"))
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`running on ${process.env.PORT}`);
+    console.log(`running on ${PORT}`);
 })
