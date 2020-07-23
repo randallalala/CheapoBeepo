@@ -12,21 +12,23 @@ require("dotenv").config();
 mongoose.Promise = Promise;
 
 mongoose
-.connect(process.env.MONGODBLIVE, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-})
-.then(() => {
-  console.log("mongodb is running!");
-})
-.catch((e) => {
-  console.log(e);
-});
+    .connect(process.env.MONGODBLIVE, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    })
+    .then(() => {
+        console.log("mongodb is running!");
+    })
+    .catch((e) => {
+        console.log(e);
+    });
 
 const Item = require("./models/item.model");
-const { parse } = require("path")
+const {
+    parse
+} = require("path")
 
 
 
@@ -100,16 +102,16 @@ axios.get("https://www.fairprice.com.sg/category/infant-formula--1")
 
 
         Item.deleteMany({})
-        .then(() => {
-            Item.create(items)
-                .then(created => {
-                    console.log(created);
-                    mongoose.disconnect(() => console.log("end"));
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        })
+            .then(() => {
+                Item.create(items)
+                    .then(created => {
+                        console.log(created);
+                        mongoose.disconnect(() => console.log("end"));
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
 
         // todo: import Item model somewhere on top
         // create a new Item() and save it for each item in 'items' array

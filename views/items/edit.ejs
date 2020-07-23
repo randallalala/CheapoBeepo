@@ -14,14 +14,37 @@
     <select name="unit">
         <%
         let options = ["Select One", "Grams", "Ounces", "mL"]
+        
         for (let i = 0; i < options.length; i++) {
             let selected = ( item.unit == i) ? "selected" : "Select One";
         %>
-            <option value="<%=options[i] %>" <%=selected %>>
+            <option value="<%=options[i] %>" selected="<%=selected %>">
                 <%=options[i] %>
             </option>
         <% } %>
     </select>
+
+    <div><br>
+            <label> Business/Shop </label><br>
+            <select name="shop"> <br>
+                <option value="">Select One</option>
+                <% shops.forEach(shop => { %>
+                    
+                <option value="<%= shop._id %>"><%= shop.shopname %> </option> 
+                <% }) %>
+            </select>
+        </div>
+
+        <div><br>
+            <label> Location </label><br>
+            <select name="location"> <br>
+                <option value="">Select One</option>
+                <% shops.forEach(shop => { %>
+                <option value="<%= shop._id %>"> <%= shop.location %> </option>
+                <% }) %>
+            </select>
+        </div>
+
     <div><br>
             <strong style="text-decoration: underline;">Conversion Reference</strong>
             <br>

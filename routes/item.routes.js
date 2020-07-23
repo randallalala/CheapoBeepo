@@ -20,7 +20,7 @@ router.get("/review", (req, res) => {
     Item.find()
         .populate("shop")
         .then((items) => {
-            console.log(items);
+            // console.log(items);
             res.render("items/review", {
                 items,
             });
@@ -65,8 +65,8 @@ router.post("/create", async (req, res) => {
         } else if (req.body.unit == "millilitres") {
             newitem.unit = "millilitres";
         }
-        console.log(unit);
-        console.log(newitem);
+        // console.log(unit);
+        // console.log(newitem);
         let saveditem = await newitem.save();
         // console.log("new item saved");
         if (saveditem) {
@@ -80,32 +80,53 @@ router.post("/create", async (req, res) => {
 
 
 //  UPDATE GET
-router.get("/edit/:id", (req, res) => {
+// router.get("/edit/:id", (req, res) => {
+//     // let uom = ["Select One", "Grams", "Ounces", "mL"]
+//     Item.findById(req.params.id)
+//         .then((item) => {
+//             console.log(item);
+//             res.render("items/edit", {
+//                 item,
+//                 // uom // parse in for edit.ejs to make less complicated
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
+router.get("/edit/:id", async (req, res) => {
     // let uom = ["Select One", "Grams", "Ounces", "mL"]
-    Item.findById(req.params.id)
-        .then((item) => {
-            console.log(item);
-            res.render("items/edit", {
-                item,
-                // uom // parse in for edit.ejs to make less complicated
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    let item = await Item.findById(req.params.id)
+    let shops = await Shop.find()
+    res.render("items/edit", {
+        item,
+        shops
+        // uom // parse in for edit.ejs to make less complicated
+    });
 });
 
 //  UPDATE POST
-router.post("/edit/:id", (req, res) => {
+// router.post("/edit/:id", (req, res) => {
+//     // console.log(req.body);
+//     Item.findByIdAndUpdate(req.params.id, req.body)
+//         .then(() => {
+//             console.log("amended");
+//             res.redirect("/review");
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
+router.post("/edit/:id", async (req, res) => {
     // console.log(req.body);
-    Item.findByIdAndUpdate(req.params.id, req.body)
-        .then(() => {
-            console.log("amended");
+    try {
+        await Item.findByIdAndUpdate(req.params.id, req.body)
+        console.log(req.body);
+        console.log("edited");
             res.redirect("/review");
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // DELETE
@@ -123,7 +144,6 @@ router.post("/delete/:id", (req, res) => {
 router.get("/search", async (req, res) => {
     // console.log(req.query.search);
     try {
-
         let searched = (req.query.search);
         let totalResults = await Item.find().populate("shop");
         let searchResults = totalResults.filter(item => {
@@ -142,6 +162,17 @@ router.get("/search", async (req, res) => {
     };
 });
 
+
+module.exports = router;
+
+// ------------------------------- NOTES AND TESTS
+// let str = "mushroom"
+// let regex = new RegExp("mushro", "i")
+// console.log(regex);
+// console.log(regex.test(str));
+
+// ----------------- PSEUDO CONVERSION
+
 /*
 function convert() {
     
@@ -157,32 +188,16 @@ function convert() {
     let convqty =  item quantity /  item quantity * 100
     let convprice =  item price /  item quantity * 100
     
-    
     return convqty && convprice
     
 }
 */
 
 
-// let conv = item.unit * 28.35
-// }
-
-/*
-
-        <br>
-        1 gallon = 4 quarts
-        <br>
-        1 ounce = 28.35 grams
-        <br>
-        1 pound = 453.6 grams
-        <br>
-        1 pound = 16 ounces
-*/
-// let ounceConv = ounce * 28.35
+// ----------------- OLD CODES
 
 
-
-// // BACKUP SPECIFIC ITEMS
+// // BACKUP SPECIFIC ITEMS SEARCH
 // router.get("/search", (req, res) => {
 //     // console.log(req.query.search);
 //     let searchresult = (req.query.search)
@@ -212,12 +227,3 @@ function convert() {
 //             console.log(err);
 //         });
 // });
-
-
-module.exports = router;
-
-// ------------------------------- NOTES AND TESTS
-// let str = "mushroom"
-// let regex = new RegExp("mushro", "i")
-// console.log(regex);
-// console.log(regex.test(str));

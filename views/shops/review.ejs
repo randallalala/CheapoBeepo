@@ -1,9 +1,9 @@
 <!-- SHOW SHOP RESULTS AFTER SEARCHING VIEWS -->
-<h3 style="text-decoration: underline;"> Businesses/Shops List </h3>
 <br>
+<h3 style="text-decoration: underline; text-align: center;"> Businesses/Shops List </h3><br>
 <form class="form-inline" method="post" action="/shops/review">
-    <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
             <% shops.forEach(shop => {%>
             <div class="col-md-3">
@@ -12,9 +12,9 @@
                         <h5 class="card-title" style="text-decoration: underline;"><%= shop.shopname %></h5>
                         <p class="card-text">Location: <%= shop.location %></p>
                         <a method="get" href="/shops/edit/<%= shop._id %>" style="display:inline"
-                            class="btn-sm btn-info" type="submit" role="button">Edit</a>
+                            class="btn-sm btn-primary" type="submit" >Edit</a>
                         <form method="POST" action="/shops/delete/<%= shop._id %>?_method=DELETE" style="display:inline">
-                            <button class="btn-danger btn-sm" type="submit">Delete</button>
+                            <button class=" btn-sm btn-danger" type="submit">Delete</button>
                         </form>
                     </div>
                 </div>

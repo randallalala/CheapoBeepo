@@ -4,9 +4,10 @@ const expressEjsLayouts = require("express-ejs-layouts");
 const app = express();
 require("dotenv").config()
 const PORT = process.env.PORT
+
 mongoose.Promise = Promise;
 mongoose
-    .connect(process.env.MONGODBLIVE, {
+    .connect(process.env.MONGODB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true, // deprecated error
