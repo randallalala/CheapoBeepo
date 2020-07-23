@@ -1,6 +1,6 @@
 ## Introduction
 SEI 23 - Project 2
-Database is hosted here: https://https://cheapobeepo.herokuapp.com
+Database is hosted here: https://cheapobeepo.herokuapp.com
 
 #### Database Objectives
 - Database can be populated with various items and respective prices 
