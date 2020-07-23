@@ -24,8 +24,8 @@
             <td> <%= item.quantity %> <%= item.unit %> </td>
             <td>$<%= item.price.toFixed(2) %> </td>
             <td> </td>
-            <td> <%= item.shop.shopname %> </td>
-            <td> <%= item.shop.location %> </td>
+            <td> <%= item.shop ? item.shop.shopname : ""  %> </td>
+            <td> <%= item.shop ? item.shop.location : "" %> </td>
             
         </tr>
         <% }) %>

@@ -122,11 +122,17 @@ router.get("/search", async (req, res) => {
         let searched = (req.query.search);
         let totalResults = await Item.find().populate("shop");
         let searchResults = totalResults.filter(item => {
-            // console.log(parseFloat(item.price).includes(req.query.search));
-            return item.itemName.toLowerCase().includes(req.query.search) ||
-                item.shop.shopname.toLowerCase().includes(req.query.search) ||
-                item.shop.location.toLowerCase().includes(req.query.search);
+            if(item.shop){
+                 item.itemName.toLowerCase().includes(req.query.search) ||
+                item.shop.location.toLowerCase().includes(req.query.search) ||
+                item.shop.shopname.toLowerCase().includes(req.query.search) ;
+                
+            } 
+            
+            return item.itemName.toLowerCase().includes(req.query.search) 
         });
+        // console.log(parseFloat(item.price).includes(req.query.search));
+        console.log(typeof searchResults);
         res.render("items/results", {
             searched,
             searchResults,
