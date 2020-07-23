@@ -7,7 +7,7 @@ const PORT = process.env.PORT
 
 mongoose.Promise = Promise;
 mongoose
-    .connect(process.env.MONGODB, {
+    .connect(process.env.MONGODBLIVE, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true, // deprecated error
