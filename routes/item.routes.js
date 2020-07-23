@@ -78,22 +78,8 @@ router.post("/create", async (req, res) => {
     }
 });
 
-
 //  UPDATE GET
-// router.get("/edit/:id", (req, res) => {
-//     // let uom = ["Select One", "Grams", "Ounces", "mL"]
-//     Item.findById(req.params.id)
-//         .then((item) => {
-//             console.log(item);
-//             res.render("items/edit", {
-//                 item,
-//                 // uom // parse in for edit.ejs to make less complicated
-//             });
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// });
+
 router.get("/edit/:id", async (req, res) => {
     // let uom = ["Select One", "Grams", "Ounces", "mL"]
     let item = await Item.findById(req.params.id)
@@ -106,23 +92,12 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 //  UPDATE POST
-// router.post("/edit/:id", (req, res) => {
-//     // console.log(req.body);
-//     Item.findByIdAndUpdate(req.params.id, req.body)
-//         .then(() => {
-//             console.log("amended");
-//             res.redirect("/review");
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// });
 router.post("/edit/:id", async (req, res) => {
     // console.log(req.body);
     try {
         await Item.findByIdAndUpdate(req.params.id, req.body)
-        console.log(req.body);
-        console.log("edited");
+        // console.log(req.body);
+        // console.log("edited");
             res.redirect("/review");
     } catch (error) {
         console.log(error);
@@ -222,6 +197,35 @@ function convert() {
 //                 results,
 //                 searchresult
 //             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
+
+// GET UPDATE
+// router.get("/edit/:id", (req, res) => {
+//     // let uom = ["Select One", "Grams", "Ounces", "mL"]
+//     Item.findById(req.params.id)
+//         .then((item) => {
+//             console.log(item);
+//             res.render("items/edit", {
+//                 item,
+//                 // uom // parse in for edit.ejs to make less complicated
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
+
+//  UPDATE POST
+// router.post("/edit/:id", (req, res) => {
+//     // console.log(req.body);
+//     Item.findByIdAndUpdate(req.params.id, req.body)
+//         .then(() => {
+//             console.log("amended");
+//             res.redirect("/review");
 //         })
 //         .catch((err) => {
 //             console.log(err);

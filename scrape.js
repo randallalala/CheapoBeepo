@@ -8,9 +8,8 @@ const convert = require('convert-units')
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-
+// seed into mongodb
 mongoose.Promise = Promise;
-
 mongoose
     .connect(process.env.MONGODBLIVE, {
         useNewUrlParser: true,
@@ -25,15 +24,12 @@ mongoose
         console.log(e);
     });
 
-const Item = require("./models/item.model");
-const {
-    parse
-} = require("path")
+// const Item = require("./models/item.model");
+// const { parse } = require("path")
+const convert = require("convert-units")
 
 
-
-
-//axios will get the content
+// AXIOS GET NTUC WEBSITE
 axios.get("https://www.fairprice.com.sg/category/infant-formula--1")
     .then(resp => {
         // get
@@ -44,7 +40,6 @@ axios.get("https://www.fairprice.com.sg/category/infant-formula--1")
         let prices = [];
         let names = [];
         let qtys = [];
-        // drag strings out of the objects retrieved
         for (let i = 0; i < x.length; i++) {
             // price
             prices.push(x[i]
@@ -82,14 +77,14 @@ axios.get("https://www.fairprice.com.sg/category/infant-formula--1")
         });
         let qtyNumbers = qtys.map(qty => parseFloat(qty.match(/\d+.?\d+/)[0]));
         let qtyUnits = qtys.map(qty => qty.match(/[a-zA-Z]+$/)[0]);
-        // convert everything to grams because model enum no kg
+        // convert everything to grams
         qtyNumbers = qtyNumbers.map((qty, i) => {
             return convert(qty * qtyMults[i]).from(qtyUnits[i]).to('g');
         });
         console.log("numbers only");
         console.log(qtyNumbers);
         let items = [];
-        // it's inefficient to go again here but nevermind lah
+        // it's inefficient to go again 
         for (let i = 0; i < x.length; i++) {
             items.push({
                 itemName: names[i],

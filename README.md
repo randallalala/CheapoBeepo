@@ -35,36 +35,20 @@ Database is hosted here: https://https://cheapobeepo.herokuapp.com
 ## Breakdown
 #### Minimum Viable Product Features
 - Item model 
-- Start button
-- Reset button
-- Game generate sequence 
-- Store player attempt sequence
-- Compare sequences 
-- Output Win/Lose state
-- Continue on for at least 8 levels
-- Minimal aesthetics
+- Shop model
+- CRUD routes for items (name,qty,price,unit)
+- CRUD routes for shops (name,location)
+- Multi search function
 
 #### Additional Features
-- Normal/extreme difficulty levels
-- Player name and highscore storing
-- Infinity levels as long as player can handle
-- Level indicator and Moves counter
-- Timer and progressbar
-- Sound on square flash / click
-- Not hardcoded
+- MVC
+- Data scrape from websites
+- Seed data from scrape into database
+- Convert unit npm package
   
-<!-- <img src="./patternmatching.gif"> -->
-
-#### Game Design & Pseudo Code Planning
-- Generate random sequence and store array (a)
-- Listen and store player sequence array (b)
-- Compare (a) and (b) 
-  - Compare only when array lengths are same 
-  - Compare a
-- Win / lose functions
-- Start / reset buttons and functions
-- Timer and progressbar functions
-- level and moves counter functions
+#### Database Design
+<img src="./User Flow Diagram.png">
+<img src="./Wireframe.png">
 
 #### Technologies used:
 - Javascript
@@ -78,39 +62,30 @@ Database is hosted here: https://https://cheapobeepo.herokuapp.com
 - HTML
 - Bootstrap
 - Jquery
+- hatchful shopify
 
 #### Bugs & Issues Faced
-- Overlapping timer after player win
-    - Resolved: Reset intervals in between rounds
-- Flashing glitch
-    - Resolved: Remove mid-game win alerts
-- Empty restart button if player keeps clicking
-    - Resolved: Add a remove click listener function
-- Blinker glitch which overlaps
-    - Resolved: Add a remove click listener function
-- Other issues/mistakes which took time to resolve
-    - Resolved: Wrong symbols used that caused malfunctions = inplace of ()
-- shop model tying name and location togather,to add location model (unsolved)
-
+- NTUC site was messy and scraping it resulted in huge time loss and only reaping 30% results
+    - Resolved: Use Cold Storage or Sheng Siong site
+- Didnt find resolution to multi search with - RegExp(req.query.search)
+    - Resolved: use filter() and includes()
+- Shop model ties "name" and "location" together,to add location model (unresolved)
+- Units error (unresolved)
+- Show previous selection for units / shop / location when editing (unresolved)
 
 #### Further Possible Improvements
-- Responsive screen size scaling
 - Refactor code
-- Stopwatch from beginning
-- Modal at the end of game to reveal all stats
-- Add more colored squares as the game progresses till infinity (non-hard coded)
-  - **Pseudo code**
-    1. after winning two levels - add three(x) boxes below
-       - win counter (var 1) to count 
-       - for loop side ++ (var 2)  
-       - change grid style row (var 3)
-       - function bottom() + three boxes
-    2. after winning two levels - add three(x) boxes to side
-       - win counter (var 3)  to count 
-       - for loop (var 2)  
-       - change grid style col (var 4)
-       - function side() + three boxes
-    3. x++ 
-       - 4boxes bottom
-       - 4boxes side
-    4. x++
+- Geolocation
+- Filter/sort based on: 
+    - distance
+    - price
+    - shop name
+- Title icon
+- Ratings system:
+    - to validate added items
+    - shows rating numbers
+    - shows rated by who
+- Authentication and user login for item rating and editing
+    - able to see user profile
+- Standardized price vs qty calculation
+- Date log for item added/edited/last endorsed

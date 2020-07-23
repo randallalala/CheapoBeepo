@@ -2,8 +2,8 @@
 <br>
 <h3 style="text-decoration: underline; text-align: center;"> Businesses/Shops List </h3><br>
 <form class="form-inline" method="post" action="/shops/review">
-        <div class="container">
-            <div class="row">
+    <div class="container">
+        <div class="row">
 
             <% shops.forEach(shop => {%>
             <div class="col-md-3">
@@ -12,8 +12,9 @@
                         <h5 class="card-title" style="text-decoration: underline;"><%= shop.shopname %></h5>
                         <p class="card-text">Location: <%= shop.location %></p>
                         <a method="get" href="/shops/edit/<%= shop._id %>" style="display:inline"
-                            class="btn-sm btn-primary" type="submit" >Edit</a>
-                        <form method="POST" action="/shops/delete/<%= shop._id %>?_method=DELETE" style="display:inline">
+                            class="btn-sm btn-primary" type="submit">Edit</a>
+                        <form method="POST" action="/shops/delete/<%= shop._id %>?_method=DELETE"
+                            style="display:inline">
                             <button class=" btn-sm btn-danger" type="submit">Delete</button>
                         </form>
                     </div>
@@ -21,28 +22,26 @@
             </div>
             <% }) %>
         </div>
+
+        <br>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+
+            </ul>
+        </nav>
+
     </div>
 </form>
 <br>
 <!-- PAGE NUMBERING NAVIGATION-->
-<nav aria-label="...">
-    <ul class="pagination">
-
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-
-        <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-
-    </ul>
-</nav>
